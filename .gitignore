@@ -1,0 +1,8 @@
+dist
+package-lock.json
+build
+.idea
+node_modules
+css
+.DS_Store
+.docx

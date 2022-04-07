@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@700&family=Roboto&display=swap');
+
+$body-color: white;
+$red-color: rgb(220, 53, 69);
+
+.map-container {
+  // width: 500px;
+  height: 700px;
+  // height: max-content;
+  // height: 100%;
+  // height: '100vh'; 
+}
+
+// #map { height: 180px; }
+
+body {
+  background-color: $body-color;
+  margin: 0 auto;
+  padding: 0;
+  // max-width: 600px;
+  text-align: center;
+  justify-content: center;
+}
+
+.shop-header {
+  color: $red-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+table {
+  table-layout: fixed;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+thead th {
+  width: 25%;
+}
+
+.active:hover  {
+  background-color: $red-color;
+  cursor: pointer;
+}
