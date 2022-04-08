@@ -63,7 +63,9 @@ export const points = [
 
 export const getPointsList = () => {
   const pointList = points.map((point) => point.name).sort();
-  console.log(pointList);
+  return pointList.map((pointName)=>(
+    <Option value={pointName} style={{ textAlign: 'left' }}>{pointName}</Option>
+  ));
 }
 
 const randomPoint = () => points[Math.floor(Math.random() * points.length)]

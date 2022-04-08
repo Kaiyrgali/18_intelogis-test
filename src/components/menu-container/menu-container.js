@@ -23,30 +23,16 @@ import { Select } from 'antd';
 const { Option } = Select;
 
 const pointList = points.map((point) => point.name).sort();
+const pointSave = pointList.map((pointName)=>(
+  <Option value={pointName} style={{ textAlign: 'left' }}>{pointName}</Option>
+));
+
 function handleChange(value) {
   console.log(`selected ${value}`);
 }
 
-
-console.log(pointList);
-// submenu keys of first level
-// const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
-
-// const orders = createOrders();
-// console.log(orders);
-// import createOrders from '../../services/points-store-service';
-
 function MenuContainer ({ orders }) {
-  // sub=orders[0].orderNumber:
-  // if (orders) {console.log("details", orders[0].orderNumber);};
 
-  // const openSub = (!orders) ? '' : orders[0].orderNumber;
- 
-
-  // console.log( 'orderStoreService', orderStoreService);
-  // console.log(orders))
-  // console.log('MenuContainer', orders);
-  // if (orders) {console.log('MenuContainer', orders)}
   const [openKeys, setOpenKeys] = useState(['sub']);
 
   const onOpenChange = (keys) => {
@@ -59,44 +45,38 @@ function MenuContainer ({ orders }) {
     // }
   };
 
+function handleChange(value) {
+  console.log(`selected ${value}`);
+}
+
   return (
     
-
     <Menu mode="inline" openKeys={openKeys} onOpenChange={onOpenChange} style={{ overflowX: 'scroll', height: '100vh', }}>
 
       {orders.map((order)=>(
-            <SubMenu key={order.orderNumber}
-                     icon={<MailOutlined />}
-                     title={order.orderNumber}
-                     onClick = {()=>console.log('click')} >
-              <Menu.Item key={order.orderNumber+'fp'}>{order.startPoint.name}</Menu.Item>
-              <Menu.Item key={order.orderNumber+'sp'}>{order.finishPoint.name}</Menu.Item>
-              <Menu.Item key={order.orderNumber+'select'}>{pointList[0]}</Menu.Item>
+        <SubMenu  key={order.orderNumber}
+                  icon={<MailOutlined />}
+                  title={order.orderNumber}>
 
-            </SubMenu>
+          <Select defaultValue={order.startPoint.name} style={{ width: 200, paddingLeft: '40px' }} onChange={handleChange}>
+            {pointList.map((pointName)=>(
+              <Option value={pointName} style={{ textAlign: 'left' }}>{pointName}</Option>
+            ))};
+          </Select>
 
-          ))}
+          <Select defaultValue={order.finishPoint.name} style={{ width: 200, paddingLeft: '40px' }} onChange={handleChange}>
+            {pointList.map((pointName)=>(
+              <Option value={pointName} style={{ textAlign: 'left' }}>{pointName}</Option>
+            ))};
+          </Select>
 
-      <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-        <Menu.Item key="1">Option 1</Menu.Item>
-        <Menu.Item key="2">Option 2</Menu.Item>
-        <Menu.Item key="3">Option 3</Menu.Item>
-        <Menu.Item key="4">Option 4</Menu.Item>
-      </SubMenu>
-     <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
-        <Menu.Item key="5">Option 5</Menu.Item>
-        <Menu.Item key="6">Option 6</Menu.Item>
-        <SubMenu key="sub3" title="Submenu">
-          <Menu.Item key="7">Option 7</Menu.Item>
-          <Menu.Item key="8">Option 8</Menu.Item>
+          <Select defaultValue={order.finishPoint.name} style={{ width: 200, paddingLeft: '40px' }} onChange={handleChange}>
+            {pointSave};
+          </Select>
+
         </SubMenu>
-      </SubMenu>
-      <SubMenu key="sub4" icon={<SettingOutlined />} title="Navigation Three">
-        <Menu.Item key="9">Option 9</Menu.Item>
-        <Menu.Item key="10">Option 10</Menu.Item>
-        <Menu.Item key="11">Option 11</Menu.Item>
-        <Menu.Item key="12">Option 12</Menu.Item>
-      </SubMenu>
+      ))}
+
     </Menu> 
   );
 };
