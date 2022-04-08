@@ -1,4 +1,4 @@
-const points = [
+export const points = [
   {
     id: 1,
     name: 'Westminster',
@@ -60,6 +60,11 @@ const points = [
     gpsW: 0.183584,
   },
 ];
+
+export const getPointsList = () => {
+  const pointList = points.map((point) => point.name).sort();
+  console.log(pointList);
+}
 
 const randomPoint = () => points[Math.floor(Math.random() * points.length)]
 

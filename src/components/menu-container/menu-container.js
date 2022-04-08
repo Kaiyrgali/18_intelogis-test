@@ -12,13 +12,23 @@ import { withOrderStoreService } from '../hoc';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
-
+import { points } from '../../services/points-store-service'
 import 'antd/dist/antd.css';
 import { Menu } from 'antd';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
+import { Select } from 'antd';
 
+const { Option } = Select;
+
+const pointList = points.map((point) => point.name).sort();
+function handleChange(value) {
+  console.log(`selected ${value}`);
+}
+
+
+console.log(pointList);
 // submenu keys of first level
 // const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
 
@@ -28,7 +38,7 @@ const { SubMenu } = Menu;
 
 function MenuContainer ({ orders }) {
   // sub=orders[0].orderNumber:
-  console.log(orders[0]);
+  // if (orders) {console.log("details", orders[0].orderNumber);};
 
   // const openSub = (!orders) ? '' : orders[0].orderNumber;
  
@@ -59,13 +69,12 @@ function MenuContainer ({ orders }) {
                      icon={<MailOutlined />}
                      title={order.orderNumber}
                      onClick = {()=>console.log('click')} >
-              <Menu.Item key={order.orderNumber}>{order.startPoint.name}</Menu.Item>
-              <Menu.Item key="2001">{order.finishPoint.name}</Menu.Item>
-              <Menu.Item key="2008">{orders[0]['.finishPoint.name']}</Menu.Item>
+              <Menu.Item key={order.orderNumber+'fp'}>{order.startPoint.name}</Menu.Item>
+              <Menu.Item key={order.orderNumber+'sp'}>{order.finishPoint.name}</Menu.Item>
+              <Menu.Item key={order.orderNumber+'select'}>{pointList[0]}</Menu.Item>
 
             </SubMenu>
 
-          
           ))}
 
       <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">

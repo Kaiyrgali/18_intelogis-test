@@ -1,5 +1,6 @@
 dist
 package-lock.json
+.eslintrc.json
 build
 .idea
 node_modules
