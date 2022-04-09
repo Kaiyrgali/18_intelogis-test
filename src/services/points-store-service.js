@@ -79,7 +79,8 @@ function createOrders() {
       const startPoint = randomPoint();
       const finishPoint = randomPoint();
       if (startPoint !== finishPoint) {
-        orders.push({ orderNumber: `Order №${orders.length + 1}`, startPoint, finishPoint });
+        const count = orders.length + 1;
+        orders.push({ id: count, orderNumber: `Order №${count}`, startPoint, finishPoint });
       }
     }
   }

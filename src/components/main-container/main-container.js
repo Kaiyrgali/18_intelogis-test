@@ -1,5 +1,6 @@
 import React from 'react';
 import Map from '../map';
+import VectorLayersExample from '../map/map2'
 import MenuContainer from '../menu-container';
 import OrderListContainer from '../menu-container';
 import { Layout, Menu } from 'antd';
@@ -25,6 +26,7 @@ function MainContainer() {
               <div className="site-layout-background" style={{ padding: 0, textAlign: 'center' }}>
                 {/* возможно этот див мешает карте */}
                 <Map />
+                {/* <VectorLayersExample /> */}
 
               </div>
             </Content>

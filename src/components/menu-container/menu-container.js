@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import createOrders from  '../../services/points-store-service';
-import MenuItem from '../menu-item';
+// import MenuItem from '../menu-item';
 import getOrders from '../../actions';
 import { compose } from '../../utils';
 import { withOrderStoreService } from '../hoc';
@@ -22,10 +22,18 @@ import { Select } from 'antd';
 
 const { Option } = Select;
 
-const pointList = points.map((point) => point.name).sort();
-const pointSave = pointList.map((pointName)=>(
-  <Option value={pointName} style={{ textAlign: 'left' }}>{pointName}</Option>
-));
+const PointList = () => {
+  const pointList = points.map((point) => point.name).sort();
+  return pointList.map((pointName)=>(
+    <Option
+      key={(pointName.toLocaleLowerCase()).replace(/\s/g, '')}
+      value={pointName}
+      style={{ textAlign: 'left' }}
+    >
+      {pointName}
+    </Option>
+  ));
+}
 
 function handleChange(value) {
   console.log(`selected ${value}`);
@@ -33,7 +41,7 @@ function handleChange(value) {
 
 function MenuContainer ({ orders }) {
 
-  const [openKeys, setOpenKeys] = useState(['sub']);
+  const [openKeys, setOpenKeys] = useState(['']);
 
   const onOpenChange = (keys) => {
     console.log('keys' ,keys);
@@ -45,34 +53,39 @@ function MenuContainer ({ orders }) {
     // }
   };
 
-function handleChange(value) {
-  console.log(`selected ${value}`);
-}
+
 
   return (
-    
-    <Menu mode="inline" openKeys={openKeys} onOpenChange={onOpenChange} style={{ overflowX: 'scroll', height: '100vh', }}>
+    <Menu
+      mode="inline"
+      openKeys={openKeys}
+      onOpenChange={onOpenChange}
+      style={{ overflowX: 'scroll', height: '100vh', }}
+    >
 
       {orders.map((order)=>(
-        <SubMenu  key={order.orderNumber}
-                  icon={<MailOutlined />}
-                  title={order.orderNumber}>
+        <SubMenu  
+          key={order.id}
+          icon={<MailOutlined />}
+          title={order.orderNumber}
+        >
+          <Menu.Item key={'sp'+order.id}>
+            <Select
+              defaultValue={order.startPoint.name}
+              style={{ width: 200, color: 'green' }}
+              onChange={handleChange}>
+                {PointList()};
+            </Select>
+          </Menu.Item>
 
-          <Select defaultValue={order.startPoint.name} style={{ width: 200, paddingLeft: '40px' }} onChange={handleChange}>
-            {pointList.map((pointName)=>(
-              <Option value={pointName} style={{ textAlign: 'left' }}>{pointName}</Option>
-            ))};
-          </Select>
-
-          <Select defaultValue={order.finishPoint.name} style={{ width: 200, paddingLeft: '40px' }} onChange={handleChange}>
-            {pointList.map((pointName)=>(
-              <Option value={pointName} style={{ textAlign: 'left' }}>{pointName}</Option>
-            ))};
-          </Select>
-
-          <Select defaultValue={order.finishPoint.name} style={{ width: 200, paddingLeft: '40px' }} onChange={handleChange}>
-            {pointSave};
-          </Select>
+          <Menu.Item key={'fp'+order.id}>
+            <Select
+              defaultValue={order.finishPoint.name}
+              style={{ width: 200, color: 'red' }} 
+              onChange={handleChange}>
+                {PointList()};
+            </Select>
+          </Menu.Item>
 
         </SubMenu>
       ))}
@@ -94,13 +107,8 @@ class OrderListContainer extends Component {
     if (orders) {
       console.log('OrderListContainer', orders);
       return (
-        
-        <MenuContainer orders = {orders}
-          // ratesValute={Object.values(rates.Valute)}
-          // today={today}
-        />
+        <MenuContainer orders = {orders} />
       );
-    
     }
     return null;
   }

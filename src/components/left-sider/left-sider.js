@@ -27,13 +27,9 @@ function LeftSider() {
     >
       <div className="logo" />
       <Menu theme="dark" mode="inline" style={{marginTop: '90px', textAlign: 'center'}}>
-        {/* {orders.map((order)=>(
-          <MenuItem key = {order.orderNumber}
-                    order = {order}  
-          
-        />
-        ))}  */}
-        Orders
+        {/* <MenuItem > */}
+          Orders
+        {/* </MenuItem > */}
       </Menu>
     </Sider>
   );
