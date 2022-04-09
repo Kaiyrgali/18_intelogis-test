@@ -5,15 +5,11 @@ const ordersRequested = (newState) => ({
   payload: newState,
 });
 
-// const ordersLoaded = (newOrders) => ({
-//   type: 'CREATE_ORDERS_SUCCESS',
-//   payload: newOrders,
-// });
+export const activeOrder = (newOrder) => ({
+  type: 'GET_ACTIVE_ORDER',
+  payload: newOrder,
+});
 
-// const ordersError = (error) => ({
-//   type: 'CREATE_ORDERS_FAILURE',
-//   payload: error,
-// });
 
 const getOrders = (orderStoreService) => () => (dispatch) => {
   // console.log('orderStoreService', orderStoreService)

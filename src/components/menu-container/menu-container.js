@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import createOrders from  '../../services/points-store-service';
 // import MenuItem from '../menu-item';
-import getOrders from '../../actions';
+import getOrders,  { activeOrder } from '../../actions';
 import { compose } from '../../utils';
 import { withOrderStoreService } from '../hoc';
 
@@ -39,12 +39,18 @@ function handleChange(value) {
   console.log(`selected ${value}`);
 }
 
-function MenuContainer ({ orders }) {
+function MenuContainer ({ orders, activeOrder }) {
 
   const [openKeys, setOpenKeys] = useState(['']);
 
   const onOpenChange = (keys) => {
     console.log('keys' ,keys);
+       const currentOrder = orders.find((order)=>order.id==keys[1]);
+        console.log('current', currentOrder);
+
+        const getActiveOrder = (currentOrder) => () => (dispatch) => {dispatch(activeOrder);}
+
+        console.log('activeOrder', activeOrder);
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
     // if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
     //   setOpenKeys(keys);
@@ -52,7 +58,6 @@ function MenuContainer ({ orders }) {
       setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
     // }
   };
-
 
 
   return (
@@ -101,13 +106,15 @@ class OrderListContainer extends Component {
 
   render() {
     const {
-      orders
+      orders, activeOrder
     } = this.props;
     
-    if (orders) {
+    if (orders.length>0) {
       console.log('OrderListContainer', orders);
       return (
-        <MenuContainer orders = {orders} />
+        <MenuContainer orders = {orders}
+                      activeOrder = {activeOrder} 
+        />
       );
     }
     return null;
@@ -117,14 +124,17 @@ class OrderListContainer extends Component {
 
 const mapStateToProps = ({
   orderList: {
-    orders
+    orders,
+    activeOrder,
   },
 }) => ({
-  orders
+  orders,
+  activeOrder,
 });
 
 const mapDispatchToProps = (dispatch, { orderStoreService }) => bindActionCreators({
   getOrders: getOrders(orderStoreService),
+  // onActiveOrder: activeOrder(newOrder),
 }, dispatch);
 
 export default compose(

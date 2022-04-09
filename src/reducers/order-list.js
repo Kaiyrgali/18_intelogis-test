@@ -2,32 +2,26 @@ const updateOrderList = (state, action) => {
   if (state === undefined) {
     return {
       orders: [],
-      // loading: true,
-      // error: null,
+      activeOrder: {},
     };
   }
   // console.log('state', state);
 
   switch (action.type) {
-    // console.log(state)
+    
     case 'CREATE_ORDERS_REQUEST':
+      console.log(state);
       return {
+        activeOrder: state.orderList.activeOrder,
         orders: action.payload,
+        // activeOrder,
       };
 
-    // case 'CREATE_ORDERS_SUCCESS':
-    //   console.log('load', action.payload);
-    //   return {
-    //     ...state,
-    //     orders: action.payload,
-    //     loading: false,
-    //   };
-
-    // case 'CREATE_ORDERS_FAILURE':
-    //   return {
-    //     ...state,
-    //     error: action.payload,
-    //   };
+    case 'GET_ACTIVE_ORDER':
+      return {
+        ...state,
+        activeOrder: action.payload,
+      }
 
     default:
       return state;
