@@ -2,7 +2,7 @@ const updateOrderList = (state, action) => {
   if (state === undefined) {
     return {
       orders: [],
-      activeOrder: {},
+      activeOrder: undefined,
     };
   }
   // console.log('state', state);

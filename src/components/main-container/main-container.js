@@ -2,7 +2,7 @@ import React from 'react';
 import Map from '../map';
 import VectorLayersExample from '../map/map2'
 import MenuContainer from '../menu-container';
-import OrderListContainer from '../menu-container';
+// import MenuContainer from '../menu-container';
 import { Layout, Menu } from 'antd';
 
 
@@ -18,7 +18,7 @@ function MainContainer() {
   return (
     <Row>
           <Col flex="70px" >
-            <OrderListContainer style={{ overflowX: 'scroll' }}/>
+            <MenuContainer style={{ overflowX: 'scroll' }}/>
             {/* <MenuContainer  style={{ overflowX: 'scroll' }}/> */}
           </Col>
           <Col flex="auto">

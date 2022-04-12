@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ShopHeader from '../shop-header/shop-header';
@@ -6,51 +7,68 @@ import { HomePage, ArchivePage, NotFound } from '../pages';
 import store from '../../store';
 import ErrorBoundry from '../error-boundry';
 import { RatesStoreServiceProvider } from '../orderstore-service-context';
-// import RatesStoreService from '../../services/points-store';
 
 import { MapContainer, TileLayer, Marker, Popup, Circle, Polyline  } from 'react-leaflet'
 
 import 'antd/dist/antd.css';
+import { getPointsList } from '../../services/points-store-service';
 
-// const rateStoreService = new RatesStoreService();
+function MapRender ({activeOrder}) {
 
-function Map() {
+  if (activeOrder) {
+    const startMarker = [activeOrder.startPoint.gpsN, activeOrder.startPoint.gpsW];
+    const finishMarker = [activeOrder.finishPoint.gpsN, activeOrder.finishPoint.gpsW];
+    const startMarkerPopup = activeOrder.startPoint.name;
+    const finishMarkerPopup = activeOrder.finishPoint.name
 
-  const polyline = [
-    [51.505, -0.09],
-    [51.51, -0.12],
-  ]
-  
+    const polyline = [
+      startMarker,
+      finishMarker
+    ]
+    return(
+      <span>
+        <Marker position={startMarker} >
+          <Popup>
+            {startMarkerPopup}
+          </Popup>
+        </Marker>
+
+        <Marker position={finishMarker}>
+          <Popup>
+            {finishMarkerPopup}
+          </Popup>
+        </Marker>
+
+        <Polyline pathOptions={{ color: 'red', weight: 4 }}
+                  positions={polyline} />
+      </span>
+  )}
+  return null
+}
+
+function Map({activeOrder}) {
+
   return (
-  
-      <MapContainer center={[51.505, -0.09]} zoom={13} className='map-container'>
+    <MapContainer center={[51.505, -0.09]} zoom={13} className='map-container'>
         
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={[51.505, -0.09]} >
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-
-
-        <Marker position={[51.555, -0.09]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-
-        <Polyline pathOptions={{ color: 'red', weight: 4 }} positions={polyline} />
-
-        <Circle center={[50.5, 30.5]} radius={200} pathOptions={{ color: 'blue' }} />
-
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
         
+      <MapRender activeOrder={activeOrder}/>
         
-      </MapContainer>
+    </MapContainer>
     
   );
 }
 
-export default Map;
+const mapStateToProps = ({
+  orderList: {
+    activeOrder,
+  },
+}) => ({
+  activeOrder,
+});
+
+export default connect(mapStateToProps, null)(Map);

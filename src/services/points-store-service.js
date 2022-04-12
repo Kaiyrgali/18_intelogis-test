@@ -50,8 +50,8 @@ export const points = [
   {
     id: 9,
     name: 'Downing Street',
-    gpsN: 51.503254,
-    gpsW: 0.12785,
+    gpsN: 51.503396,
+    gpsW: -0.127640,
   },
   {
     id: 10,

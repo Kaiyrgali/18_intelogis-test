@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import createOrders from  '../../services/points-store-service';
 // import MenuItem from '../menu-item';
-import getOrders,  { activeOrder } from '../../actions';
+import getOrders from '../../actions';
+import { activeOrder } from '../../actions/actions'
 import { compose } from '../../utils';
 import { withOrderStoreService } from '../hoc';
 
@@ -21,6 +22,7 @@ const { SubMenu } = Menu;
 import { Select } from 'antd';
 
 const { Option } = Select;
+const orders = createOrders();
 
 const PointList = () => {
   const pointList = points.map((point) => point.name).sort();
@@ -35,11 +37,7 @@ const PointList = () => {
   ));
 }
 
-function handleChange(value) {
-  console.log(`selected ${value}`);
-}
-
-function MenuContainer ({ orders, activeOrder }) {
+function MenuContainer ({ activeOrder, onActiveOrder }) {
 
   const [openKeys, setOpenKeys] = useState(['']);
 
@@ -47,18 +45,36 @@ function MenuContainer ({ orders, activeOrder }) {
     console.log('keys' ,keys);
        const currentOrder = orders.find((order)=>order.id==keys[1]);
         console.log('current', currentOrder);
-
-        const getActiveOrder = (currentOrder) => () => (dispatch) => {dispatch(activeOrder);}
-
-        console.log('activeOrder', activeOrder);
+        onActiveOrder(currentOrder);
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
-    // if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-    //   setOpenKeys(keys);
-    // } else {
+
       setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
     // }
   };
 
+  const startOnChange = (value, lastOrder) => {
+    const newStartPoint = points.find((point)=>point.name===value);
+    const newOrder = {
+      ...lastOrder,
+      startPoint: newStartPoint
+    } ;
+    onActiveOrder(newOrder);
+    console.log(newOrder);
+    console.log(orders);
+    orders.splice((newOrder.id-1), 1, newOrder);
+    console.log((newOrder.id-1), orders);
+  }
+
+  const finishOnChange = (value, lastOrder) => {
+    const newFinishPoint = points.find((point)=>point.name===value);
+    const newOrder = {
+      ...lastOrder,
+      finishPoint: newFinishPoint
+    } ;
+    onActiveOrder(newOrder);
+    orders.splice((newOrder.id-1), 1, newOrder);
+    console.log((newOrder.id-1), orders);
+  }
 
   return (
     <Menu
@@ -78,7 +94,7 @@ function MenuContainer ({ orders, activeOrder }) {
             <Select
               defaultValue={order.startPoint.name}
               style={{ width: 200, color: 'green' }}
-              onChange={handleChange}>
+              onSelect={(value, event) => startOnChange(value, order)}>
                 {PointList()};
             </Select>
           </Menu.Item>
@@ -87,7 +103,7 @@ function MenuContainer ({ orders, activeOrder }) {
             <Select
               defaultValue={order.finishPoint.name}
               style={{ width: 200, color: 'red' }} 
-              onChange={handleChange}>
+              onSelect={(value, event) => finishOnChange(value, order)}>
                 {PointList()};
             </Select>
           </Menu.Item>
@@ -99,29 +115,6 @@ function MenuContainer ({ orders, activeOrder }) {
   );
 };
 
-class OrderListContainer extends Component {
-  componentDidMount() {
-    this.props.getOrders();
-  }
-
-  render() {
-    const {
-      orders, activeOrder
-    } = this.props;
-    
-    if (orders.length>0) {
-      console.log('OrderListContainer', orders);
-      return (
-        <MenuContainer orders = {orders}
-                      activeOrder = {activeOrder} 
-        />
-      );
-    }
-    return null;
-  }
-}
-
-
 const mapStateToProps = ({
   orderList: {
     orders,
@@ -132,14 +125,14 @@ const mapStateToProps = ({
   activeOrder,
 });
 
-const mapDispatchToProps = (dispatch, { orderStoreService }) => bindActionCreators({
-  getOrders: getOrders(orderStoreService),
-  // onActiveOrder: activeOrder(newOrder),
-}, dispatch);
+const mapDispatchToProps = (dispatch) => ({
+  
+  onActiveOrder: (newOrder) => {
+    console.log(`Increase ${newOrder}`);
+    dispatch(activeOrder(newOrder));
+  },
+});
 
-export default compose(
-  withOrderStoreService(),
-  connect(mapStateToProps, mapDispatchToProps),
-)(OrderListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(MenuContainer);
 
 // export default MenuContainer;

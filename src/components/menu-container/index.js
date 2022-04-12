@@ -1,3 +1,3 @@
-import OrderListContainer from './menu-container';
+import MenuContainer from './menu-container';
 
-export default OrderListContainer;
+export default MenuContainer;
