@@ -1,49 +1,31 @@
 import React from 'react';
-import { useState } from 'react';
 
-import Map from '../map';
-import MenuContainer from '../menu-container';
 import LeftSider from '../left-sider';
 import MainContainer from '../main-container';
-
-
-import { Layout, Menu } from 'antd';
-import { Row, Col, Divider } from 'antd';
+import 'antd/dist/antd.css';
 import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
-  TeamOutlined,
-  UserOutlined,
-  UploadOutlined,
-  VideoCameraOutlined,
+  FlagOutlined,
+  CalculatorOutlined,
+  FileExcelOutlined,
 } from '@ant-design/icons';
 
-// import createOrders from '../../services/points-store-service';
+import { Layout } from 'antd';
 
-
-// import { Menu } from 'antd';
-import { MailOutlined, SettingOutlined } from '@ant-design/icons';
-
-const { Header, Content, Footer, Sider } = Layout;
-
-const { SubMenu } = Menu;
-// submenu keys of first level
+const { Header, Footer } = Layout;
 
 function HomePage() {
-  
-
-  // const orders = createOrders();
-  // console.log(orders);
 
   return (
     <Layout hasSider>
 
       <LeftSider />
       
-      <Layout className="site-layout" style={{ marginLeft: 200 }}>
-        <Header className="site-layout-background" style={{ padding: 0 }} />
+      <Layout  style={{ marginLeft: 200 }}>
+        <Header  style={{paddingLeft: '30px', backgroundColor: 'grey', color: 'white', fontSize: '30px', textAlign: 'left' }} >
+          <FlagOutlined style={{ paddingLeft: '30px' }}/>
+          <CalculatorOutlined style={{  paddingLeft: '30px', color: 'blue' }}/>
+          <FileExcelOutlined style={{ paddingLeft: '30px' }}/>
+        </Header>
         <MainContainer />
         <Footer style={{ textAlign: 'center' }}>Bekkali Kaiyrgali ©2022 for ILS Online
         </Footer>
@@ -53,6 +35,5 @@ function HomePage() {
 
   );
 }
-
 
 export default HomePage;

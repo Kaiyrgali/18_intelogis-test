@@ -1,27 +1,19 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import createOrders from  '../../services/points-store-service';
-// import MenuItem from '../menu-item';
-import getOrders from '../../actions';
-import { activeOrder } from '../../actions/actions'
-import { compose } from '../../utils';
-import { withOrderStoreService } from '../hoc';
 
-import Spinner from '../spinner';
-import ErrorIndicator from '../error-indicator';
+import activeOrder from '../../actions/actions'
 
 import { points } from '../../services/points-store-service'
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
+import { Select } from 'antd';
 import { Menu } from 'antd';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import {  MailOutlined } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
-import { Select } from 'antd';
-
 const { Option } = Select;
+
 const orders = createOrders();
 
 const PointList = () => {
@@ -42,14 +34,10 @@ function MenuContainer ({ activeOrder, onActiveOrder }) {
   const [openKeys, setOpenKeys] = useState(['']);
 
   const onOpenChange = (keys) => {
-    console.log('keys' ,keys);
     const currentOrder = orders.find((order)=>order.id===+keys[keys.length - 1]);
-    console.log('current', currentOrder);
     onActiveOrder(currentOrder);
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
-
-      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
-    // }
+    setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
   };
 
   const startOnChange = (value, lastOrder) => {
@@ -59,10 +47,7 @@ function MenuContainer ({ activeOrder, onActiveOrder }) {
       startPoint: newStartPoint
     } ;
     onActiveOrder(newOrder);
-    console.log(newOrder);
-    console.log(orders);
     orders.splice((newOrder.id-1), 1, newOrder);
-    console.log((newOrder.id-1), orders);
   }
 
   const finishOnChange = (value, lastOrder) => {
@@ -73,7 +58,6 @@ function MenuContainer ({ activeOrder, onActiveOrder }) {
     } ;
     onActiveOrder(newOrder);
     orders.splice((newOrder.id-1), 1, newOrder);
-    console.log((newOrder.id-1), orders);
   }
 
   return (
@@ -117,22 +101,19 @@ function MenuContainer ({ activeOrder, onActiveOrder }) {
 
 const mapStateToProps = ({
   orderList: {
-    orders,
+    // orders,
     activeOrder,
   },
 }) => ({
-  orders,
+  // orders,
   activeOrder,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   
   onActiveOrder: (newOrder) => {
-    console.log(`Increase ${newOrder}`);
     dispatch(activeOrder(newOrder));
   },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuContainer);
-
-// export default MenuContainer;

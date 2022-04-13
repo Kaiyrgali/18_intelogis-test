@@ -1,3 +1,3 @@
-import getOrders from './actions';
+import activeOrder from './actions';
 
-export default getOrders;
+export default activeOrder;

@@ -1,17 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ShopHeader from '../shop-header/shop-header';
-import { HomePage, ArchivePage, NotFound } from '../pages';
-import store from '../../store';
-import ErrorBoundry from '../error-boundry';
-import { RatesStoreServiceProvider } from '../orderstore-service-context';
 
-import { MapContainer, TileLayer, Marker, Popup, Circle, Polyline  } from 'react-leaflet'
-
-import 'antd/dist/antd.css';
-import { getPointsList } from '../../services/points-store-service';
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet'
 
 function MapRender ({activeOrder}) {
 
@@ -25,6 +15,7 @@ function MapRender ({activeOrder}) {
       startMarker,
       finishMarker
     ]
+
     return(
       <span>
         <Marker position={startMarker} >
