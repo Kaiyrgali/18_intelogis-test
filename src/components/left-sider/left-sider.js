@@ -19,6 +19,7 @@ function LeftSider() {
         overflowX: 'scroll',
         // overflowY: 'visible',
         height: '100vh',
+        // width: '200px',
         position: 'fixed',
         left: 0,
         top: 0,
