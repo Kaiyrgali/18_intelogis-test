@@ -11,6 +11,7 @@
   "author": "Bekkali Kaiyrgali <kairgalib@ya.ru>",
   "license": "ISC",
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@babel/runtime": "^7.17.8",
     "antd": "^4.19.5",
     "core-js": "^3.21.1",

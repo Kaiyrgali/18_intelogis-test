@@ -44,12 +44,7 @@ function HomePage() {
       
       <Layout className="site-layout" style={{ marginLeft: 200 }}>
         <Header className="site-layout-background" style={{ padding: 0 }} />
-
-        
         <MainContainer />
-        
-
-        
         <Footer style={{ textAlign: 'center' }}>Bekkali Kaiyrgali ©2022 for ILS Online
         </Footer>
       </Layout>

@@ -1,37 +1,25 @@
 import React from 'react';
-import { Layout, Menu } from 'antd';
+import { OrderedListOutlined} from '@ant-design/icons';
+import { Layout } from 'antd';
 
-const { Header, Content, Footer, Sider } = Layout;
-import { MailOutlined, SettingOutlined } from '@ant-design/icons';
-
-// const { Header, Content, Footer, Sider } = Layout;
-
-const { SubMenu } = Menu;
+const { Sider } = Layout;
 
 function LeftSider() {
   return (
     <Sider 
-    // reverseArrow = {true} wrap={true}
       style={{
-        overflow: 'auto',
-        // collapsedWidth: 0,
-        // collapsible: true,
-        overflowX: 'scroll',
-        // overflowY: 'visible',
+        backgroundColor: '#24499a',
         height: '100vh',
-        // width: '200px',
         position: 'fixed',
         left: 0,
         top: 0,
         bottom: 0,
       }}
     >
-      <div className="logo" />
-      <Menu theme="dark" mode="inline" style={{marginTop: '90px', textAlign: 'center'}}>
-        {/* <MenuItem > */}
-          Orders
-        {/* </MenuItem > */}
-      </Menu>
+      <div style={{ color: 'white', backgroundColor: "#66b32f", marginTop: '90px', paddingTop: '10px', paddingBottom: '10px'}}>
+        <OrderedListOutlined style={{ fontSize: '20px' }}/>
+        <p>Orders</p>
+      </div>
     </Sider>
   );
 }

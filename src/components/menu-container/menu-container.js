@@ -43,9 +43,9 @@ function MenuContainer ({ activeOrder, onActiveOrder }) {
 
   const onOpenChange = (keys) => {
     console.log('keys' ,keys);
-       const currentOrder = orders.find((order)=>order.id==keys[1]);
-        console.log('current', currentOrder);
-        onActiveOrder(currentOrder);
+    const currentOrder = orders.find((order)=>order.id===+keys[keys.length - 1]);
+    console.log('current', currentOrder);
+    onActiveOrder(currentOrder);
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
 
       setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
@@ -94,7 +94,7 @@ function MenuContainer ({ activeOrder, onActiveOrder }) {
             <Select
               defaultValue={order.startPoint.name}
               style={{ width: 200, color: 'green' }}
-              onSelect={(value, event) => startOnChange(value, order)}>
+              onSelect={(value) => startOnChange(value, order)}>
                 {PointList()};
             </Select>
           </Menu.Item>
@@ -103,7 +103,7 @@ function MenuContainer ({ activeOrder, onActiveOrder }) {
             <Select
               defaultValue={order.finishPoint.name}
               style={{ width: 200, color: 'red' }} 
-              onSelect={(value, event) => finishOnChange(value, order)}>
+              onSelect={(value) => finishOnChange(value, order)}>
                 {PointList()};
             </Select>
           </Menu.Item>
