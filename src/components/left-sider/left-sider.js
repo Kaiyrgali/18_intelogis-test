@@ -1,12 +1,12 @@
 import React from 'react';
-import { OrderedListOutlined} from '@ant-design/icons';
+import { OrderedListOutlined } from '@ant-design/icons';
 import { Layout } from 'antd';
 
 const { Sider } = Layout;
 
 function LeftSider() {
   return (
-    <Sider 
+    <Sider
       style={{
         backgroundColor: '#24499a',
         height: '100vh',
@@ -16,8 +16,11 @@ function LeftSider() {
         bottom: 0,
       }}
     >
-      <div style={{ color: 'white', backgroundColor: "#66b32f", marginTop: '90px', paddingTop: '10px', paddingBottom: '10px'}}>
-        <OrderedListOutlined style={{ fontSize: '20px' }}/>
+      <div style={{
+        color: 'white', backgroundColor: '#66b32f', marginTop: '90px', paddingTop: '10px', paddingBottom: '10px',
+      }}
+      >
+        <OrderedListOutlined style={{ fontSize: '20px' }} />
         <p>Orders</p>
       </div>
     </Sider>

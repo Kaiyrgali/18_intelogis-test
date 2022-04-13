@@ -63,28 +63,29 @@ export const points = [
 
 export const getPointsList = () => {
   const pointList = points.map((point) => point.name).sort();
-  return pointList.map((pointName)=>(
+  return pointList.map((pointName) => (
     <Option value={pointName} style={{ textAlign: 'left' }}>{pointName}</Option>
   ));
-}
+};
 
-const randomPoint = () => points[Math.floor(Math.random() * points.length)]
+const randomPoint = () => points[Math.floor(Math.random() * points.length)];
 
 const orders = new Array();
-console.log('new', orders);
 
 function createOrders() {
-  if (orders.length<=0) {
+  if (orders.length <= 0) {
     for (let i = 0; i < 15; i++) {
       const startPoint = randomPoint();
       const finishPoint = randomPoint();
       if (startPoint !== finishPoint) {
         const count = orders.length + 1;
-        orders.push({ id: count, orderNumber: `Order №${count}`, startPoint, finishPoint });
+        orders.push({
+          id: count, orderNumber: `Order №${count}`, startPoint, finishPoint,
+        });
       }
     }
   }
   return orders;
-};
+}
 
 export default createOrders;
