@@ -1,7 +1,19 @@
-Тестовое задание
-на должность React-разработчик
+# Test Task
+## for the position React developer
 
-Требуется спроектировать модуль отображения заявок на перевозку.
-Надо создать произвольный набор заявок и точек погрузки/разгрузки. Реализовать экранную форму, в которой слева будет таблица со списком заявок, а справа карта. При выборе в таблице строки с заявкой выбранная строка должна подсветиться, а на карте отобразиться точки погрузки и разгрузки заявки в виде маркеров и полилиния трека движения между этими точками, полученная из произвольного сервиса построения треков по дорогам. Точки погрузки/разгрузки заявок в таблице должны быть редактируемыми (в виде селекта из справочника точек). Граница между таблицей и картой должна быть изменяемая с помощью мышки (перемещается влево и вправо). Столбцы таблицы должны иметь минимальную ширину, при недостатке места для отображения таблицы с учетом минимальной ширины столбцов, таблица должна получить возможность горизонтальной прокрутки.
-Для отображения карты желательно использовать пакет Leaflet, для компонетов — AntdDesign, для хранения стейта компонентов и данных — Redux, для реакции на события — Saga. В качестве основы приложения желательно использовать React create app. Не использовать классы, только функциональные компоненты.
-Решение требуется предоставить в виде исходного кода, готового для развертывания на веб-сервере (приложить файловый архив или ссылку на github, например).
+![N|Solid](https://sojuzpatent.com/tmImgs/676/676633.jpg)
+
+
+It is required to design a module for displaying requests for transportation
+
+- create an arbitrary set of orders and loading / unloading points;
+- on the left of the screen there should be a table with a list of orders, and on the right a map;
+- active order should be highlighted;
+- and the map will display the loading and unloading points of the application in the form of markers and a polyline;
+- polyline is built from an arbitrary service for building tracks along roads;
+- loading / unloading points of applications in the table must be editable (in the form of a select from the directory of points);
+- the border between the table and the map must be changeable with the mouse (moves left and right);
+- the table should be able to scroll horizontally;
+- to display the map, it is desirable to use the Leaflet package, for components - AntdDesign, for storing the state of components and data - Redux, for reacting to events - Saga;
+- don't use classes, only functional components;
+
