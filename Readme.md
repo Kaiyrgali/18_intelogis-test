@@ -1,19 +1,23 @@
-# Test Task
-## for the position React developer
+# Тестовое задание
+## на позицию React-разработчик
 
 ![N|Solid](https://sojuzpatent.com/tmImgs/676/676633.jpg)
 
+### Требуется спроектировать модуль для отображения заявок на перевозку:
 
-It is required to design a module for displaying requests for transportation
+- создать произвольный набор заказов и точек погрузки/разгрузки;
+- слева на экране должна быть таблица со списком заказов, а справа карта;
+- активный ордер должен быть выделен;
+- на карте должны отображаться точки загрузки и выгрузки в виде маркеров и полилинии;
+- полилиния строится из произвольного сервиса для построения дорожек вдоль дорог;
+- точки загрузки/выгрузки приложений в таблице должны быть доступны для редактирования (в виде выбора из справочника точек);
+- граница между таблицей и картой должна изменяться мышью (двигаться влево-вправо);
+- таблица должна иметь возможность горизонтальной прокрутки;
+- для отображения карты желательно использовать пакет Leaflet, для компонентов - AntdDesign, для хранения состояния компонентов и данных - Redux, для реагирования на события - Saga;
+- не используйте классы, только функциональные компоненты;
 
-- create an arbitrary set of orders and loading / unloading points;
-- on the left of the screen there should be a table with a list of orders, and on the right a map;
-- active order should be highlighted;
-- and the map will display the loading and unloading points of the application in the form of markers and a polyline;
-- polyline is built from an arbitrary service for building tracks along roads;
-- loading / unloading points of applications in the table must be editable (in the form of a select from the directory of points);
-- the border between the table and the map must be changeable with the mouse (moves left and right);
-- the table should be able to scroll horizontally;
-- to display the map, it is desirable to use the Leaflet package, for components - AntdDesign, for storing the state of components and data - Redux, for reacting to events - Saga;
-- don't use classes, only functional components;
-
+### Что не сделано:
+- маршрут выстраивается двумя способами :
+  1. функция MapRender выстаивает прямую линию и работает без ошибок */}
+  2. подключенный RoutingMachine не рендерится при смене активного ордера и изменении точек погрузки\выгрузки. Причину за отведенное время на выполнение тестового задания ен нашел.
+- для реагирования на события Saga не использовалась;

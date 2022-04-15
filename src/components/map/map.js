@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import RoutingMachine from '../routing-machine/routing-machine';
 import {
   MapContainer, TileLayer, Marker, Popup, Polyline,
 } from 'react-leaflet';
@@ -16,7 +16,7 @@ function MapRender({ activeOrder }) {
       startMarker,
       finishMarker,
     ];
-
+      
     return (
       <span>
         <Marker position={startMarker}>
@@ -35,6 +35,8 @@ function MapRender({ activeOrder }) {
           pathOptions={{ color: 'red', weight: 4 }}
           positions={polyline}
         />
+
+
       </span>
     );
   }
@@ -42,6 +44,7 @@ function MapRender({ activeOrder }) {
 }
 
 function Map({ activeOrder }) {
+
   return (
     <MapContainer center={[51.505, -0.09]} zoom={13} className="map-container">
 
@@ -50,7 +53,11 @@ function Map({ activeOrder }) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
+      {/* маршрут выстраивается двумя способами
+      1. функция MapRender выстаивает прямую линию и работает без ошибок */}
       <MapRender activeOrder={activeOrder} />
+      {/* 2. подключенный RoutingMachine не рендерится при смене активного ордера и изменении точек погрузки\выгрузки. Причину за отведенное время на выполнение тестового задания ен нашел. */}
+      {(activeOrder) ? <RoutingMachine activeOrder={activeOrder}/> : <span></span> }
 
     </MapContainer>
 
